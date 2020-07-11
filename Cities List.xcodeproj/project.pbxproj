@@ -14,6 +14,7 @@
 		1E96272F24B9BFF30064E991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E96272E24B9BFF30064E991 /* Assets.xcassets */; };
 		1E96273224B9BFF30064E991 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E96273024B9BFF30064E991 /* LaunchScreen.storyboard */; };
 		1E96273D24B9BFF40064E991 /* Cities_ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96273C24B9BFF40064E991 /* Cities_ListTests.swift */; };
+		1E96274824B9C1150064E991 /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E96274724B9C1150064E991 /* cities.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		1E96273824B9BFF40064E991 /* Cities ListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cities ListTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E96273C24B9BFF40064E991 /* Cities_ListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cities_ListTests.swift; sourceTree = "<group>"; };
 		1E96273E24B9BFF40064E991 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E96274724B9C1150064E991 /* cities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cities.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				1E96272E24B9BFF30064E991 /* Assets.xcassets */,
 				1E96273024B9BFF30064E991 /* LaunchScreen.storyboard */,
 				1E96273324B9BFF30064E991 /* Info.plist */,
+				1E96274724B9C1150064E991 /* cities.json */,
 			);
 			path = "Cities List";
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E96274824B9C1150064E991 /* cities.json in Resources */,
 				1E96273224B9BFF30064E991 /* LaunchScreen.storyboard in Resources */,
 				1E96272F24B9BFF30064E991 /* Assets.xcassets in Resources */,
 				1E96272D24B9BFF00064E991 /* Main.storyboard in Resources */,
