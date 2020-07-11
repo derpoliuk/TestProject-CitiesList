@@ -13,7 +13,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        if let splitViewController = window?.rootViewController as? UISplitViewController {
+            splitViewController.preferredDisplayMode = .allVisible
+            splitViewController.delegate = self
+        }
+        return true
+    }
+}
+
+// MARK: - UISplitViewControllerDelegate
+
+extension AppDelegate: UISplitViewControllerDelegate {
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         return true
     }
 }
