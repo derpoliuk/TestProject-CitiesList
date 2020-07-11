@@ -7,34 +7,40 @@
 //
 
 import UIKit
+import MapKit
 
-class DetailViewController: UIViewController {
-
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
-
-
-    func configureView() {
-        // Update the user interface for the detail item.
-        if let detail = detailItem {
-            if let label = detailDescriptionLabel {
-                label.text = detail.description
+final class DetailViewController: UIViewController {
+    @IBOutlet private var mapView: MKMapView!
+    var city: City? {
+        didSet {
+            if let previousCity = oldValue {
+                mapView.removeAnnotation(previousCity)
             }
+            configureView()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         configureView()
     }
 
-    var detailItem: NSDate? {
-        didSet {
-            // Update the view.
-            configureView()
+    func configureView() {
+        guard let city = city, let mapView = mapView else {
+            return
         }
+        mapView.addAnnotation(city)
+        mapView.setCenter(city.coordinate, animated: true)
     }
-
-
 }
 
+// I declared this extension here because no other files in the app are using it
+extension City: MKAnnotation {
+    var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: coordinates.lat, longitude: coordinates.lon)
+    }
+
+    var title: String? {
+        return displayName
+    }
+}

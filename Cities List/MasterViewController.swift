@@ -8,23 +8,14 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController {
-
-    var detailViewController: DetailViewController? = nil
-    var objects = [Any]()
-
+final class MasterViewController: UITableViewController {
+    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+    private let viewModel = CitiesListViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        navigationItem.leftBarButtonItem = editButtonItem
-
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-        navigationItem.rightBarButtonItem = addButton
-        if let split = splitViewController {
-            let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
-        }
+        viewModel.delegate = self
+        viewModel.loadCities()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -32,26 +23,27 @@ class MasterViewController: UITableViewController {
         super.viewWillAppear(animated)
     }
 
-    @objc
-    func insertNewObject(_ sender: Any) {
-        objects.insert(NSDate(), at: 0)
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
-    }
-
     // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let object = objects[indexPath.row] as! NSDate
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-                detailViewController = controller
-            }
+        /*
+         Default Master-Detail implementatino uses force-unwraps for accessing `DetailViewController`. I changed it to multiple optionals. This is my general approach in development - I'm trying not to crash the app when it isn't necessary.
+
+         This is somewhat ideological discussion: should we terminate app to avoid any inconsistent states or should we keep it running.
+
+         Also, one more argument for terminating app in this particular case is that force-unwrap will fail only when developer will make a mistake. And we will be able to catch this error as early as possible.
+
+         For me personally, this kind of human error (not providing propper classes, changing segue identifier without updating code), isn't bad enough to crash the app. Hence, optionals are used.
+         */
+        guard segue.identifier == "showDetail",
+            let navigationController = segue.destination as? UINavigationController,
+            let controller = navigationController.topViewController as? DetailViewController,
+            let indexPath = tableView.indexPathForSelectedRow else {
+            return
         }
+        controller.city = viewModel.cities[indexPath.row]
+        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+        controller.navigationItem.leftItemsSupplementBackButton = true
     }
 
     // MARK: - Table View
@@ -61,30 +53,40 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return viewModel.cities.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        let city = viewModel.cities[indexPath.row]
+        cell.textLabel?.text = city.displayName
+        cell.detailTextLabel?.text = city.displayCoordinates
         return cell
     }
-
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            objects.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-        }
-    }
-
-
 }
 
+// MARK: - UISearchBarDelegate
+
+extension MasterViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.searchTerm = searchText
+    }
+}
+
+// MARK: - CitiesListViewModelDelegate
+
+extension MasterViewController: CitiesListViewModelDelegate {
+    func didUpdate(loading: Bool) {
+        loading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+    }
+
+    func didUpdate(cities: [City]) {
+        tableView.reloadData()
+    }
+}
+
+private extension City {
+    var displayCoordinates: String {
+        return "\(coordinates.lat); \(coordinates.lon)"
+    }
+}
