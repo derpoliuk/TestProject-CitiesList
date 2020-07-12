@@ -10,6 +10,7 @@
 		1E34158524BB291300A40CCC /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34158424BB291300A40CCC /* City.swift */; };
 		1E34158824BB301100A40CCC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E34158724BB301100A40CCC /* MapKit.framework */; };
 		1E34158A24BB328B00A40CCC /* MockCitiesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34158924BB328B00A40CCC /* MockCitiesLoader.swift */; };
+		1E34158C24BB3A7C00A40CCC /* Trie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34158B24BB3A7C00A40CCC /* Trie.swift */; };
 		1E96272424B9BFF00064E991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96272324B9BFF00064E991 /* AppDelegate.swift */; };
 		1E96272824B9BFF00064E991 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96272724B9BFF00064E991 /* MasterViewController.swift */; };
 		1E96272A24B9BFF00064E991 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96272924B9BFF00064E991 /* DetailViewController.swift */; };
@@ -38,6 +39,7 @@
 		1E34158424BB291300A40CCC /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		1E34158724BB301100A40CCC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1E34158924BB328B00A40CCC /* MockCitiesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCitiesLoader.swift; sourceTree = "<group>"; };
+		1E34158B24BB3A7C00A40CCC /* Trie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trie.swift; sourceTree = "<group>"; };
 		1E96272024B9BFF00064E991 /* Cities List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cities List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E96272324B9BFF00064E991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E96272724B9BFF00064E991 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				1E96274B24B9C9D30064E991 /* RawCity.swift */,
 				1E96274D24B9C9DD0064E991 /* Coordinates.swift */,
 				1E96274F24B9C9FC0064E991 /* CitiesJSONLoader.swift */,
+				1E34158B24BB3A7C00A40CCC /* Trie.swift */,
 				1E96272B24B9BFF00064E991 /* Main.storyboard */,
 				1E96272E24B9BFF30064E991 /* Assets.xcassets */,
 				1E96273024B9BFF30064E991 /* LaunchScreen.storyboard */,
@@ -237,6 +240,7 @@
 				1E96275024B9C9FC0064E991 /* CitiesJSONLoader.swift in Sources */,
 				1E96272424B9BFF00064E991 /* AppDelegate.swift in Sources */,
 				1E96274C24B9C9D30064E991 /* RawCity.swift in Sources */,
+				1E34158C24BB3A7C00A40CCC /* Trie.swift in Sources */,
 				1E96274A24B9C6EE0064E991 /* CitiesListViewModel.swift in Sources */,
 				1E96274E24B9C9DD0064E991 /* Coordinates.swift in Sources */,
 				1E96272824B9BFF00064E991 /* MasterViewController.swift in Sources */,
