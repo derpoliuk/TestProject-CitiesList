@@ -90,6 +90,7 @@
 		1E96271724B9BFF00064E991 = {
 			isa = PBXGroup;
 			children = (
+				1E96274724B9C1150064E991 /* cities.json */,
 				1E96272224B9BFF00064E991 /* Cities List */,
 				1E96273B24B9BFF40064E991 /* Cities ListTests */,
 				1E96272124B9BFF00064E991 /* Products */,
@@ -122,7 +123,6 @@
 				1E96272E24B9BFF30064E991 /* Assets.xcassets */,
 				1E96273024B9BFF30064E991 /* LaunchScreen.storyboard */,
 				1E96273324B9BFF30064E991 /* Info.plist */,
-				1E96274724B9C1150064E991 /* cities.json */,
 			);
 			path = "Cities List";
 			sourceTree = "<group>";
