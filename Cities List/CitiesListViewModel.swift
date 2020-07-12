@@ -43,7 +43,11 @@ final class CitiesListViewModel {
     private var originalCities: [City] = []
     /// Cities stored by their displayed name
     private var citiesByName: [String: City] = [:]
-    /// Trie that stores display names of cities
+    /**
+     Trie that stores display names of cities
+
+     I used trie structure to improve time efficiency of filtering cities.
+     */
     private let trie = Trie()
 
     init(citiesLoader: CitiesLoader = CitiesJSONLoader()) {
@@ -84,8 +88,7 @@ final class CitiesListViewModel {
 
     private func filterCities(_ term: String) {
         isLoading = true
-        // TODO: Sort cities here. Current implementation returns unsorted words. `sorted()` method has O(n log n) complexity and doesn't satisfy task requirements
-        let words = trie.findWordsWithPrefix(prefix: term).sorted()
+        let words = trie.findWordsWithPrefix(prefix: term)
         var cities: [City] = []
         for word in words {
             if let city = citiesByName[word] {

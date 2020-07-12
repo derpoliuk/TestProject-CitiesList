@@ -13,7 +13,7 @@ import Foundation
 
  Each node is a single character of a word.
 
- Taken from [Ray Wenderlich website](https://www.raywenderlich.com/892-swift-algorithm-club-swift-trie-data-structure) with slight modifications.
+ Taken from [Ray Wenderlich website](https://www.raywenderlich.com/892-swift-algorithm-club-swift-trie-data-structure) with modifications.
  */
 final class Trie: NSObject, NSCoding {
     private enum Constants {
@@ -58,6 +58,7 @@ extension Trie {
     /**
      Inserts a word into the trie. If the word is already present, do nothing.
 
+     - Important: Alls words should be added in alphabetical order
      - Parameter word: The word to be inserted
      */
     func insert(word: String) {
@@ -194,7 +195,7 @@ extension Trie {
         if rootNode.isTerminating {
             subTrieWords.append(previousLetters)
         }
-        for childNode in rootNode.children.values {
+        for childNode in rootNode.childrenArray {
             let childWords = wordsInSubTrie(rootNode: childNode, partialWord: previousLetters)
             subTrieWords += childWords
         }
@@ -214,7 +215,7 @@ extension Trie {
             if lastNode.isTerminating {
                 words.append(prefixLowerCased)
             }
-            for childNode in lastNode.children.values {
+            for childNode in lastNode.childrenArray {
                 let childWords = wordsInSubTrie(rootNode: childNode, partialWord: prefixLowerCased)
                 words += childWords
             }
@@ -224,13 +225,16 @@ extension Trie {
 }
 
 /**
- A node in the trie
+ A node in the trie.
+
+ Original implemenation stores nodes without order. I used array (`childrenArray`) to store children nodes in alphabetical order.
  */
 final class TrieNode<T: Hashable> {
     var value: T?
     weak var parentNode: TrieNode?
     var children: [T: TrieNode] = [:]
     var isTerminating = false
+    var childrenArray: [TrieNode] = []
     var isLeaf: Bool {
         return children.isEmpty
     }
@@ -256,6 +260,8 @@ final class TrieNode<T: Hashable> {
         guard children[value] == nil else {
             return
         }
-        children[value] = TrieNode(value: value, parentNode: self)
+        let node = TrieNode(value: value, parentNode: self)
+        childrenArray.append(node)
+        children[value] = node
     }
 }
