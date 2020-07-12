@@ -45,7 +45,7 @@ final class CitiesListViewModelTests: XCTestCase {
         let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
         viewModel.loadCities(async: false)
         // WHEN
-        viewModel.searchTerm = "a"
+        viewModel.filter(term: "a", async: false)
         // THEN
         XCTAssertEqual(viewModel.cities.count, 4)
         XCTAssertEqual(viewModel.cities[0].displayName, "Alabama, US")
@@ -67,7 +67,7 @@ final class CitiesListViewModelTests: XCTestCase {
         let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
         viewModel.loadCities(async: false)
         // WHEN
-        viewModel.searchTerm = "Al"
+        viewModel.filter(term: "Al", async: false)
         // THEN
         XCTAssertEqual(viewModel.cities.count, 2)
         XCTAssertEqual(viewModel.cities[0].displayName, "Alabama, US")
@@ -87,7 +87,7 @@ final class CitiesListViewModelTests: XCTestCase {
         let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
         viewModel.loadCities(async: false)
         // WHEN
-        viewModel.searchTerm = "Alb"
+        viewModel.filter(term: "Alb", async: false)
         // THEN
         XCTAssertEqual(viewModel.cities.count, 1)
         XCTAssertEqual(viewModel.cities[0].displayName, "Albuquerque, US")
@@ -106,7 +106,7 @@ final class CitiesListViewModelTests: XCTestCase {
         let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
         viewModel.loadCities(async: false)
         // WHEN
-        viewModel.searchTerm = "Sydm"
+        viewModel.filter(term: "Sydm", async: false)
         // THEN
         XCTAssertEqual(viewModel.cities.count, 0)
     }
@@ -124,8 +124,8 @@ final class CitiesListViewModelTests: XCTestCase {
         let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
         viewModel.loadCities(async: false)
         // WHEN
-        viewModel.searchTerm = "Sydm"
-        viewModel.searchTerm = ""
+        viewModel.filter(term: "Sydm", async: false)
+        viewModel.filter(term: "", async: false)
         // THEN
         XCTAssertEqual(viewModel.cities.count, 5)
         XCTAssertEqual(viewModel.cities[0].displayName, "Alabama, US")
@@ -148,7 +148,7 @@ final class CitiesListViewModelTests: XCTestCase {
         let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
         viewModel.loadCities(async: false)
         // WHEN
-        viewModel.searchTerm = "Sydney, AU"
+        viewModel.filter(term: "Sydney, AU", async: false)
         // THEN
         XCTAssertEqual(viewModel.cities.count, 1)
         XCTAssertEqual(viewModel.cities[0].displayName, "Sydney, AU")

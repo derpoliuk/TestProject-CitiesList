@@ -70,7 +70,7 @@ final class MasterViewController: UITableViewController {
 
 extension MasterViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.searchTerm = searchText
+        viewModel.filter(term: searchText)
     }
 }
 

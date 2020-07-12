@@ -23,15 +23,6 @@ final class CitiesListViewModel {
             delegate?.didUpdate(cities: cities)
         }
     }
-    var searchTerm = "" {
-        didSet {
-            if searchTerm.isEmpty {
-                resetCities()
-            } else {
-                filterCities(searchTerm)
-            }
-        }
-    }
     var isLoading = false {
         didSet {
             delegate?.didUpdate(loading: isLoading)
@@ -49,6 +40,7 @@ final class CitiesListViewModel {
      I used trie structure to improve time efficiency of filtering cities.
      */
     private let trie = Trie()
+    private var searchDispatchWorkItem: DispatchWorkItem?
 
     init(citiesLoader: CitiesLoader = CitiesJSONLoader()) {
         self.citiesLoader = citiesLoader
@@ -71,6 +63,33 @@ final class CitiesListViewModel {
             }
         }
     }
+
+    func filter(term: String, async: Bool = true) {
+        guard !term.isEmpty else {
+            resetCities()
+            return
+        }
+        isLoading = true
+        guard async else {
+            cities = filterCities(term: term)
+            isLoading = false
+            return
+        }
+        if let workItem = searchDispatchWorkItem {
+            workItem.cancel()
+        }
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let cities = self?.filterCities(term: term) else {
+                return
+            }
+            DispatchQueue.main.async {
+                self?.cities = cities
+                self?.isLoading = false
+            }
+        }
+        searchDispatchWorkItem = workItem
+        DispatchQueue.global().async(execute: workItem)
+    }
 }
 
 private extension CitiesListViewModel {
@@ -88,8 +107,13 @@ private extension CitiesListViewModel {
         isLoading = false
     }
 
-    private func filterCities(_ term: String) {
+    private func resetCities() {
         isLoading = true
+        cities = originalCities
+        isLoading = false
+    }
+
+    private func filterCities(term: String) -> [City] {
         let words = trie.findWordsWithPrefix(prefix: term)
         var cities: [City] = []
         for word in words {
@@ -97,13 +121,6 @@ private extension CitiesListViewModel {
                 cities.append(city)
             }
         }
-        self.cities = cities
-        isLoading = false
-    }
-
-    private func resetCities() {
-        isLoading = true
-        cities = originalCities
-        isLoading = false
+        return cities
     }
 }
