@@ -22,7 +22,7 @@ final class CitiesListViewModelTests: XCTestCase {
         let citiesLoader = MockCitiesLoader(cities: cities)
         let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
         // WHEN
-        viewModel.loadCities()
+        viewModel.loadCities(async: false)
         // THEN
         XCTAssertEqual(viewModel.cities.count, 5)
         XCTAssertEqual(viewModel.cities[0].displayName, "Alabama, US")
@@ -43,7 +43,7 @@ final class CitiesListViewModelTests: XCTestCase {
             ].map(City.init)
         let citiesLoader = MockCitiesLoader(cities: cities)
         let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
-        viewModel.loadCities()
+        viewModel.loadCities(async: false)
         // WHEN
         viewModel.searchTerm = "a"
         // THEN
@@ -65,7 +65,7 @@ final class CitiesListViewModelTests: XCTestCase {
             ].map(City.init)
         let citiesLoader = MockCitiesLoader(cities: cities)
         let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
-        viewModel.loadCities()
+        viewModel.loadCities(async: false)
         // WHEN
         viewModel.searchTerm = "Al"
         // THEN
@@ -85,7 +85,7 @@ final class CitiesListViewModelTests: XCTestCase {
             ].map(City.init)
         let citiesLoader = MockCitiesLoader(cities: cities)
         let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
-        viewModel.loadCities()
+        viewModel.loadCities(async: false)
         // WHEN
         viewModel.searchTerm = "Alb"
         // THEN
@@ -104,7 +104,7 @@ final class CitiesListViewModelTests: XCTestCase {
             ].map(City.init)
         let citiesLoader = MockCitiesLoader(cities: cities)
         let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
-        viewModel.loadCities()
+        viewModel.loadCities(async: false)
         // WHEN
         viewModel.searchTerm = "Sydm"
         // THEN
@@ -122,7 +122,7 @@ final class CitiesListViewModelTests: XCTestCase {
             ].map(City.init)
         let citiesLoader = MockCitiesLoader(cities: cities)
         let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
-        viewModel.loadCities()
+        viewModel.loadCities(async: false)
         // WHEN
         viewModel.searchTerm = "Sydm"
         viewModel.searchTerm = ""

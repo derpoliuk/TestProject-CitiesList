@@ -45,13 +45,19 @@ final class CitiesListViewModel {
         self.citiesLoader = citiesLoader
     }
 
-    func loadCities() {
+    func loadCities(async: Bool = true) {
         isLoading = true
+        guard async else {
+            originalCities = loadAndSortCities()
+            cities = originalCities
+            isLoading = false
+            return
+        }
         DispatchQueue.global().async { [weak self] in
             guard let `self` = self else {
                 return
             }
-            let cities = self.citiesLoader.loadCities().sorted { $0.displayName.lowercased() < $1.displayName.lowercased() }
+            let cities = self.loadAndSortCities()
             DispatchQueue.main.async { [weak self] in
                 guard let `self` = self else {
                     return
@@ -61,6 +67,10 @@ final class CitiesListViewModel {
                 self.isLoading = false
             }
         }
+    }
+
+    private func loadAndSortCities() -> [City] {
+        return citiesLoader.loadCities().sorted { $0.displayName.lowercased() < $1.displayName.lowercased() }
     }
 
     private func filterCities(_ term: String) {
