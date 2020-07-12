@@ -47,14 +47,14 @@ final class CitiesListViewModel {
 
     func loadCities() {
         isLoading = true
-        originalCities = CitiesJSONLoader.loadCities()
+        originalCities = citiesLoader.loadCities().sorted { $0.displayName.lowercased() < $1.displayName.lowercased() }
         cities = originalCities
         isLoading = false
     }
 
     private func filterCities(_ term: String) {
         isLoading = true
-        cities = originalCities.filter { $0.displayName.starts(with: term) }
+        cities = originalCities.filter { $0.displayName.lowercased().starts(with: term.lowercased()) }
         isLoading = false
     }
 

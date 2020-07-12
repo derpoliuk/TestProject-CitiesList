@@ -21,7 +21,7 @@ struct CitiesJSONLoader: CitiesLoader {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             let rawCities = try decoder.decode([RawCity].self, from: data)
-            return rawCities.sorted { $0.name.lowercased() < $1.name.lowercased() }.map(City.init)
+            return rawCities.map(City.init)
         } catch {
             fatalError("Failed to read JSON data: \(error)")
         }
