@@ -71,7 +71,9 @@ final class CitiesListViewModel {
             }
         }
     }
+}
 
+private extension CitiesListViewModel {
     private func loadAndSortCities() -> [City] {
         return citiesLoader.loadCities().sorted { $0.displayName.lowercased() < $1.displayName.lowercased() }
     }
