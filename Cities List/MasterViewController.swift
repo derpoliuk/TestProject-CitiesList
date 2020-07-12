@@ -10,6 +10,7 @@ import UIKit
 
 final class MasterViewController: UITableViewController {
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private var searchBar: UISearchBar!
     private let viewModel = CitiesListViewModel()
 
     override func viewDidLoad() {
@@ -81,6 +82,7 @@ extension MasterViewController: CitiesListViewModelDelegate {
     }
 
     func didUpdate(cities: [City]) {
+        searchBar.isUserInteractionEnabled = true
         tableView.reloadData()
     }
 }
