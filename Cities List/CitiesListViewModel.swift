@@ -38,8 +38,13 @@ final class CitiesListViewModel {
         }
     }
 
-    private var originalCities: [City] = []
     private let citiesLoader: CitiesLoader
+    /// Original list of cities, read from JSON and sorted by name
+    private var originalCities: [City] = []
+    /// Cities stored by their displayed name
+    private var citiesByName: [String: City] = [:]
+    /// Trie that stores display names of cities
+    private let trie = Trie()
 
     init(citiesLoader: CitiesLoader = CitiesJSONLoader()) {
         self.citiesLoader = citiesLoader
@@ -48,9 +53,8 @@ final class CitiesListViewModel {
     func loadCities(async: Bool = true) {
         isLoading = true
         guard async else {
-            originalCities = loadAndSortCities()
-            cities = originalCities
-            isLoading = false
+            let cities = loadAndSortCities()
+            updateCitiesAfterIntialLoad(cities)
             return
         }
         DispatchQueue.global().async { [weak self] in
@@ -59,12 +63,7 @@ final class CitiesListViewModel {
             }
             let cities = self.loadAndSortCities()
             DispatchQueue.main.async { [weak self] in
-                guard let `self` = self else {
-                    return
-                }
-                self.originalCities = cities
-                self.cities = cities
-                self.isLoading = false
+                self?.updateCitiesAfterIntialLoad(cities)
             }
         }
     }
@@ -73,9 +72,27 @@ final class CitiesListViewModel {
         return citiesLoader.loadCities().sorted { $0.displayName.lowercased() < $1.displayName.lowercased() }
     }
 
+    private func updateCitiesAfterIntialLoad(_ cities: [City]) {
+        for city in cities {
+            trie.insert(word: city.displayName.lowercased())
+            citiesByName[city.displayName.lowercased()] = city
+        }
+        originalCities = cities
+        self.cities = cities
+        isLoading = false
+    }
+
     private func filterCities(_ term: String) {
         isLoading = true
-        cities = originalCities.filter { $0.displayName.lowercased().starts(with: term.lowercased()) }
+        // TODO: Sort cities here. Current implementation returns unsorted words. `sorted()` method has O(n log n) complexity and doesn't satisfy task requirements
+        let words = trie.findWordsWithPrefix(prefix: term).sorted()
+        var cities: [City] = []
+        for word in words {
+            if let city = citiesByName[word] {
+                cities.append(city)
+            }
+        }
+        self.cities = cities
         isLoading = false
     }
 
