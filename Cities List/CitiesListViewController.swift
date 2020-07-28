@@ -28,7 +28,7 @@ final class CitiesListViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         /*
-         Default Master-Detail implementatino uses force-unwraps for accessing `DetailViewController`. I changed it to multiple optionals. This is my general approach in development - I'm trying not to crash the app when it isn't necessary.
+         Default Master-Detail implementatino uses force-unwraps for accessing `CityDetailViewController`. I changed it to multiple optionals. This is my general approach in development - I'm trying not to crash the app when it isn't necessary.
 
          This is somewhat ideological discussion: should we terminate app to avoid any inconsistent states or should we keep it running.
 
@@ -38,7 +38,7 @@ final class CitiesListViewController: UITableViewController {
          */
         guard segue.identifier == "showDetail",
             let navigationController = segue.destination as? UINavigationController,
-            let controller = navigationController.topViewController as? DetailViewController,
+            let controller = navigationController.topViewController as? CityDetailViewController,
             let indexPath = tableView.indexPathForSelectedRow else {
             return
         }

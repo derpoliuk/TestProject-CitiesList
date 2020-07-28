@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  CityDetailViewController.swift
 //  Cities List
 //
 //  Created by Stanislav Derpoliuk on 11.07.2020.
@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-final class DetailViewController: UIViewController {
+final class CityDetailViewController: UIViewController {
     @IBOutlet private var mapView: MKMapView!
     var city: City? {
         didSet {
