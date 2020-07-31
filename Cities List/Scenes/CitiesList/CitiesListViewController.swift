@@ -11,17 +11,25 @@ import UIKit
 final class CitiesListViewController: UITableViewController {
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private var searchBar: UISearchBar!
-    private let viewModel: CitiesListViewModel = CitiesListViewModelImpl()
+    private var viewModel: CitiesListViewModel?
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        viewModel.subscribe(with: self)
-        viewModel.loadCities()
+        if viewModel?.isLoading == false {
+            viewModel?.loadCities()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
         super.viewWillAppear(animated)
+    }
+
+    func bind(to viewModel: CitiesListViewModel) {
+        self.viewModel = viewModel
+        viewModel.subscribe(with: self)
+        if isViewLoaded {
+            viewModel.loadCities()
+        }
     }
 
     // MARK: - UITableViewDataSource
@@ -31,10 +39,13 @@ final class CitiesListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.cities.count
+        return viewModel?.cities.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let viewModel = viewModel else {
+            return UITableViewCell()
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let city = viewModel.cities[indexPath.row]
         cell.textLabel?.text = city.displayName
@@ -45,17 +56,7 @@ final class CitiesListViewController: UITableViewController {
     // MARK: - UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let splitViewController = splitViewController else {
-            return
-        }
-        let cityDetailViewController: CityDetailViewController
-        if splitViewController.viewControllers.count > 1, let navigationController = splitViewController.viewControllers[1] as? UINavigationController, let viewController = navigationController.viewControllers[0] as? CityDetailViewController {
-            cityDetailViewController = viewController
-        } else {
-            cityDetailViewController = CityDetailViewController.initAsInitialFromStoryboard(with: CityDetailViewController.self)
-            splitViewController.showDetailViewController(cityDetailViewController, sender: self)
-        }
-        cityDetailViewController.city = CityDetails(cityInList: viewModel.cities[indexPath.row])
+        viewModel?.displayCity(for: indexPath)
     }
 }
 
@@ -63,7 +64,7 @@ final class CitiesListViewController: UITableViewController {
 
 extension CitiesListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.filter(term: searchText)
+        viewModel?.filter(term: searchText)
     }
 }
 
@@ -71,8 +72,8 @@ extension CitiesListViewController: UISearchBarDelegate {
 
 extension CitiesListViewController: Observer {
     func didUpdate<T>(_ viewModel: T) where T : Observable {
-        if viewModel is CitiesListViewModelImpl {
-            updateFromViewModel()
+        if let viewModel = viewModel as? CitiesListViewModelImpl {
+            updateFromViewModel(viewModel: viewModel)
         }
     }
 
@@ -84,9 +85,9 @@ extension CitiesListViewController: Observer {
 // MARK: - Private Methods
 
 private extension CitiesListViewController {
-    private func updateFromViewModel() {
-        viewModel.isLoading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
-        searchBar.isUserInteractionEnabled = !viewModel.cities.isEmpty
+    private func updateFromViewModel(viewModel: CitiesListViewModel) {
+        viewModel.isLoading == true ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+        searchBar.isUserInteractionEnabled = viewModel.cities.isEmpty == false
         tableView.reloadData()
     }
 }

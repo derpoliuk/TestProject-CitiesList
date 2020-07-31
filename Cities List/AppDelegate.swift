@@ -11,20 +11,13 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    var appCoordinator: AppCoordinator?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if let splitViewController = window?.rootViewController as? UISplitViewController {
-            splitViewController.preferredDisplayMode = .allVisible
-            splitViewController.delegate = self
+            appCoordinator = AppCoordinator(splitViewController: splitViewController)
+            appCoordinator?.start()
         }
-        return true
-    }
-}
-
-// MARK: - UISplitViewControllerDelegate
-
-extension AppDelegate: UISplitViewControllerDelegate {
-    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         return true
     }
 }

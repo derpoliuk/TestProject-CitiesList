@@ -13,9 +13,11 @@ protocol CitiesListViewModel: Observable {
     var isLoading: Bool { get }
     func loadCities()
     func filter(term: String)
+    func displayCity(for indexPath: IndexPath)
 }
 
 final class CitiesListViewModelImpl: ObservableType, CitiesListViewModel {
+    var eventHandler: ((CitiesListSceneResult) -> Void)?
     private(set) var cities: [CityInList] = []{
         didSet {
             postUpdateToObservers()
@@ -50,6 +52,11 @@ final class CitiesListViewModelImpl: ObservableType, CitiesListViewModel {
 
     func filter(term: String) {
         filter(term: term, async: true)
+    }
+
+    func displayCity(for indexPath: IndexPath) {
+        let city = cities[indexPath.row]
+        eventHandler?(.displayCityDetails(city: city))
     }
 }
 
