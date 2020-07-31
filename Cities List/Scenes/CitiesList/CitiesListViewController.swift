@@ -11,7 +11,7 @@ import UIKit
 final class CitiesListViewController: UITableViewController {
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private var searchBar: UISearchBar!
-    private let viewModel = CitiesListViewModel()
+    private let viewModel: CitiesListViewModel = CitiesListViewModelImpl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +71,7 @@ extension CitiesListViewController: UISearchBarDelegate {
 
 extension CitiesListViewController: Observer {
     func didUpdate<T>(_ viewModel: T) where T : Observable {
-        if viewModel is CitiesListViewModel {
+        if viewModel is CitiesListViewModelImpl {
             updateFromViewModel()
         }
     }

@@ -8,13 +8,20 @@
 
 import Foundation
 
-final class CitiesListViewModel: ObservableType {
-    var cities: [CityInList] = []{
+protocol CitiesListViewModel: Observable {
+    var cities: [CityInList] { get }
+    var isLoading: Bool { get }
+    func loadCities()
+    func filter(term: String)
+}
+
+final class CitiesListViewModelImpl: ObservableType, CitiesListViewModel {
+    private(set) var cities: [CityInList] = []{
         didSet {
             postUpdateToObservers()
         }
     }
-    var isLoading = false {
+    private(set) var isLoading = false {
         didSet {
             postUpdateToObservers()
         }
@@ -37,7 +44,17 @@ final class CitiesListViewModel: ObservableType {
         self.citiesRepository = citiesRepository
     }
 
-    func loadCities(async: Bool = true) {
+    func loadCities() {
+        loadCities(async: true)
+    }
+
+    func filter(term: String) {
+        filter(term: term, async: true)
+    }
+}
+
+extension CitiesListViewModelImpl {
+    func loadCities(async: Bool) {
         isLoading = true
         guard async else {
             let cities = loadAndSortCities()
@@ -55,7 +72,7 @@ final class CitiesListViewModel: ObservableType {
         }
     }
 
-    func filter(term: String, async: Bool = true) {
+    func filter(term: String, async: Bool) {
         guard !term.isEmpty else {
             resetCities()
             return
@@ -83,7 +100,7 @@ final class CitiesListViewModel: ObservableType {
     }
 }
 
-private extension CitiesListViewModel {
+private extension CitiesListViewModelImpl {
     private func loadAndSortCities() -> [CityInList] {
         return citiesRepository.loadCities().sorted { $0.displayName.lowercased() < $1.displayName.lowercased() }
     }
