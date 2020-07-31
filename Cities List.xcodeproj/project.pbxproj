@@ -12,6 +12,7 @@
 		1E34158A24BB328B00A40CCC /* MockCitiesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34158924BB328B00A40CCC /* MockCitiesRepository.swift */; };
 		1E34158C24BB3A7C00A40CCC /* Trie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34158B24BB3A7C00A40CCC /* Trie.swift */; };
 		1E34159024BB515200A40CCC /* TrieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34158F24BB515200A40CCC /* TrieTests.swift */; };
+		1E6B7C2024D42F2D000CA649 /* CityDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B7C1F24D42F2D000CA649 /* CityDetails.swift */; };
 		1E96272424B9BFF00064E991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96272324B9BFF00064E991 /* AppDelegate.swift */; };
 		1E96272824B9BFF00064E991 /* CitiesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96272724B9BFF00064E991 /* CitiesListViewController.swift */; };
 		1E96272A24B9BFF00064E991 /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96272924B9BFF00064E991 /* CityDetailViewController.swift */; };
@@ -42,6 +43,7 @@
 		1E34158924BB328B00A40CCC /* MockCitiesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCitiesRepository.swift; sourceTree = "<group>"; };
 		1E34158B24BB3A7C00A40CCC /* Trie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trie.swift; sourceTree = "<group>"; };
 		1E34158F24BB515200A40CCC /* TrieTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrieTests.swift; sourceTree = "<group>"; };
+		1E6B7C1F24D42F2D000CA649 /* CityDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetails.swift; sourceTree = "<group>"; };
 		1E96272024B9BFF00064E991 /* Cities List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cities List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E96272324B9BFF00064E991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E96272724B9BFF00064E991 /* CitiesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesListViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				1E96272924B9BFF00064E991 /* CityDetailViewController.swift */,
+				1E6B7C1F24D42F2D000CA649 /* CityDetails.swift */,
 			);
 			path = CityDetails;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				1E96275024B9C9FC0064E991 /* CitiesRepository.swift in Sources */,
 				1E96272424B9BFF00064E991 /* AppDelegate.swift in Sources */,
 				1E96274C24B9C9D30064E991 /* City.swift in Sources */,
+				1E6B7C2024D42F2D000CA649 /* CityDetails.swift in Sources */,
 				1E34158C24BB3A7C00A40CCC /* Trie.swift in Sources */,
 				1E96274A24B9C6EE0064E991 /* CitiesListViewModel.swift in Sources */,
 				1E96274E24B9C9DD0064E991 /* Coordinates.swift in Sources */,

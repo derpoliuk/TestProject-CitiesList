@@ -42,7 +42,7 @@ final class CitiesListViewController: UITableViewController {
             let indexPath = tableView.indexPathForSelectedRow else {
             return
         }
-        controller.city = viewModel.cities[indexPath.row]
+        controller.city = CityDetails(cityInList: viewModel.cities[indexPath.row])
         controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         controller.navigationItem.leftItemsSupplementBackButton = true
     }
