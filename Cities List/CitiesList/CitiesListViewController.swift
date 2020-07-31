@@ -20,7 +20,7 @@ final class CitiesListViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        clearsSelectionOnViewWillAppear = splitViewController?.isCollapsed ?? true
         super.viewWillAppear(animated)
     }
 
@@ -64,7 +64,35 @@ final class CitiesListViewController: UITableViewController {
         cell.detailTextLabel?.text = city.displayCoordinates
         return cell
     }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let splitViewController = splitViewController else {
+            return
+        }
+        let cityDetailViewController: CityDetailViewController
+        if splitViewController.viewControllers.count > 1, let navigationController = splitViewController.viewControllers[1] as? UINavigationController, let viewController = navigationController.viewControllers[0] as? CityDetailViewController {
+            cityDetailViewController = viewController
+        } else {
+            cityDetailViewController = CityDetailViewController.initAsInitialFromStoryboard(with: CityDetailViewController.self)
+            splitViewController.showDetailViewController(cityDetailViewController, sender: self)
+        }
+        cityDetailViewController.city = CityDetails(cityInList: viewModel.cities[indexPath.row])
+    }
 }
+
+
+
+extension UIViewController {
+    class func initAsInitialFromStoryboard<T: UIViewController>(with type: T.Type, storyboard name: String = "\(T.self)") -> T {
+        //swiftlint:disable:next force_cast
+        let controller = UIStoryboard(name: name, bundle: nil).instantiateInitialViewController() as! T
+        controller.modalPresentationStyle = .fullScreen
+        return controller
+    }
+}
+
+
+
 
 // MARK: - UISearchBarDelegate
 
