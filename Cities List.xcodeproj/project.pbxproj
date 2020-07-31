@@ -15,6 +15,7 @@
 		1E6B7C2024D42F2D000CA649 /* CityDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B7C1F24D42F2D000CA649 /* CityDetails.swift */; };
 		1E6B7C2224D42F71000CA649 /* CitiesListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E6B7C2124D42F71000CA649 /* CitiesListViewController.storyboard */; };
 		1E6B7C2424D42FBE000CA649 /* CityDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E6B7C2324D42FBE000CA649 /* CityDetailViewController.storyboard */; };
+		1E6B7C2824D43528000CA649 /* UIViewController+StoryboardInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B7C2724D43528000CA649 /* UIViewController+StoryboardInit.swift */; };
 		1E96272424B9BFF00064E991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96272324B9BFF00064E991 /* AppDelegate.swift */; };
 		1E96272824B9BFF00064E991 /* CitiesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96272724B9BFF00064E991 /* CitiesListViewController.swift */; };
 		1E96272A24B9BFF00064E991 /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96272924B9BFF00064E991 /* CityDetailViewController.swift */; };
@@ -48,6 +49,7 @@
 		1E6B7C1F24D42F2D000CA649 /* CityDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetails.swift; sourceTree = "<group>"; };
 		1E6B7C2124D42F71000CA649 /* CitiesListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CitiesListViewController.storyboard; sourceTree = "<group>"; };
 		1E6B7C2324D42FBE000CA649 /* CityDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CityDetailViewController.storyboard; sourceTree = "<group>"; };
+		1E6B7C2724D43528000CA649 /* UIViewController+StoryboardInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+StoryboardInit.swift"; sourceTree = "<group>"; };
 		1E96272024B9BFF00064E991 /* Cities List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cities List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E96272324B9BFF00064E991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E96272724B9BFF00064E991 /* CitiesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesListViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				1E6B7C2124D42F71000CA649 /* CitiesListViewController.storyboard */,
 				1E96274924B9C6EE0064E991 /* CitiesListViewModel.swift */,
 				1E34158424BB291300A40CCC /* CityInList.swift */,
+				1E6B7C1B24D42DE9000CA649 /* CitiesRepository */,
 			);
 			path = CitiesList;
 			sourceTree = "<group>";
@@ -132,10 +135,45 @@
 			path = Trie;
 			sourceTree = "<group>";
 		};
-		1E96271724B9BFF00064E991 = {
+		1E6B7C2524D434F5000CA649 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				1E6B7C1C24D42DFD000CA649 /* CitiesList */,
+				1E6B7C1D24D42E04000CA649 /* CityDetails */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		1E6B7C2624D4350B000CA649 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				1E6B7C1E24D42E1E000CA649 /* Trie */,
+				1E6B7C2724D43528000CA649 /* UIViewController+StoryboardInit.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		1E6B7C2924D4354E000CA649 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				1E34158924BB328B00A40CCC /* MockCitiesRepository.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		1E6B7C2A24D43568000CA649 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				1E96274724B9C1150064E991 /* cities.json */,
+				1E96272E24B9BFF30064E991 /* Assets.xcassets */,
+				1E96273324B9BFF30064E991 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1E96271724B9BFF00064E991 = {
+			isa = PBXGroup;
+			children = (
 				1E96272224B9BFF00064E991 /* Cities List */,
 				1E96273B24B9BFF40064E991 /* Cities ListTests */,
 				1E96272124B9BFF00064E991 /* Products */,
@@ -156,14 +194,11 @@
 			isa = PBXGroup;
 			children = (
 				1E96272324B9BFF00064E991 /* AppDelegate.swift */,
-				1E6B7C1C24D42DFD000CA649 /* CitiesList */,
-				1E6B7C1D24D42E04000CA649 /* CityDetails */,
-				1E6B7C1B24D42DE9000CA649 /* CitiesRepository */,
-				1E6B7C1E24D42E1E000CA649 /* Trie */,
-				1E96272B24B9BFF00064E991 /* Main.storyboard */,
-				1E96272E24B9BFF30064E991 /* Assets.xcassets */,
 				1E96273024B9BFF30064E991 /* LaunchScreen.storyboard */,
-				1E96273324B9BFF30064E991 /* Info.plist */,
+				1E96272B24B9BFF00064E991 /* Main.storyboard */,
+				1E6B7C2524D434F5000CA649 /* Scenes */,
+				1E6B7C2624D4350B000CA649 /* Utilities */,
+				1E6B7C2A24D43568000CA649 /* Resources */,
 			);
 			path = "Cities List";
 			sourceTree = "<group>";
@@ -173,7 +208,7 @@
 			children = (
 				1E96273C24B9BFF40064E991 /* CitiesListViewModelTests.swift */,
 				1E34158F24BB515200A40CCC /* TrieTests.swift */,
-				1E34158924BB328B00A40CCC /* MockCitiesRepository.swift */,
+				1E6B7C2924D4354E000CA649 /* Mocks */,
 				1E96273E24B9BFF40064E991 /* Info.plist */,
 			);
 			path = "Cities ListTests";
@@ -283,6 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E6B7C2824D43528000CA649 /* UIViewController+StoryboardInit.swift in Sources */,
 				1E96275024B9C9FC0064E991 /* CitiesRepository.swift in Sources */,
 				1E96272424B9BFF00064E991 /* AppDelegate.swift in Sources */,
 				1E96274C24B9C9D30064E991 /* City.swift in Sources */,
@@ -456,7 +492,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EL662MFWXA;
-				INFOPLIST_FILE = "Cities List/Info.plist";
+				INFOPLIST_FILE = "Cities List/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -475,7 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EL662MFWXA;
-				INFOPLIST_FILE = "Cities List/Info.plist";
+				INFOPLIST_FILE = "Cities List/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -24,30 +24,7 @@ final class CitiesListViewController: UITableViewController {
         super.viewWillAppear(animated)
     }
 
-    // MARK: - Segues
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        /*
-         Default Master-Detail implementatino uses force-unwraps for accessing `CityDetailViewController`. I changed it to multiple optionals. This is my general approach in development - I'm trying not to crash the app when it isn't necessary.
-
-         This is somewhat ideological discussion: should we terminate app to avoid any inconsistent states or should we keep it running.
-
-         Also, one more argument for terminating app in this particular case is that force-unwrap will fail only when developer will make a mistake. And we will be able to catch this error as early as possible.
-
-         For me personally, this kind of human error (not providing propper classes, changing segue identifier without updating code), isn't bad enough to crash the app. Hence, optionals are used.
-         */
-        guard segue.identifier == "showDetail",
-            let navigationController = segue.destination as? UINavigationController,
-            let controller = navigationController.topViewController as? CityDetailViewController,
-            let indexPath = tableView.indexPathForSelectedRow else {
-            return
-        }
-        controller.city = CityDetails(cityInList: viewModel.cities[indexPath.row])
-        controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-        controller.navigationItem.leftItemsSupplementBackButton = true
-    }
-
-    // MARK: - Table View
+    // MARK: - UITableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -65,6 +42,8 @@ final class CitiesListViewController: UITableViewController {
         return cell
     }
 
+    // MARK: - UITableViewDelegate
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let splitViewController = splitViewController else {
             return
@@ -79,20 +58,6 @@ final class CitiesListViewController: UITableViewController {
         cityDetailViewController.city = CityDetails(cityInList: viewModel.cities[indexPath.row])
     }
 }
-
-
-
-extension UIViewController {
-    class func initAsInitialFromStoryboard<T: UIViewController>(with type: T.Type, storyboard name: String = "\(T.self)") -> T {
-        //swiftlint:disable:next force_cast
-        let controller = UIStoryboard(name: name, bundle: nil).instantiateInitialViewController() as! T
-        controller.modalPresentationStyle = .fullScreen
-        return controller
-    }
-}
-
-
-
 
 // MARK: - UISearchBarDelegate
 
