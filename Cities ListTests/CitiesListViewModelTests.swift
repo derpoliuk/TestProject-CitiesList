@@ -153,6 +153,20 @@ final class CitiesListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.cities.count, 1)
         XCTAssertEqual(viewModel.cities[0].displayName, "Sydney, AU")
     }
+
+    func testLoadingError() {
+        // GIVEN
+        let citiesRepository = LoadingErrorCitiesRepositoryMock()
+        let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
+        var error: Error?
+        viewModel.errorHandler = { inError in
+            error = inError
+        }
+        // WHEN
+        viewModel.loadCities(async: false)
+        // THEN
+        XCTAssertNotNil(error)
+    }
 }
 
 private extension CityInList {
