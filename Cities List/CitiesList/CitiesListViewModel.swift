@@ -13,12 +13,12 @@ import Foundation
  */
 protocol CitiesListViewModelDelegate: class {
     func didUpdate(loading: Bool)
-    func didUpdate(cities: [City])
+    func didUpdate(cities: [CityInList])
 }
 
 final class CitiesListViewModel {
     weak var delegate: CitiesListViewModelDelegate?
-    var cities: [City] = []{
+    var cities: [CityInList] = []{
         didSet {
             delegate?.didUpdate(cities: cities)
         }
@@ -31,9 +31,9 @@ final class CitiesListViewModel {
 
     private let citiesRepository: CitiesRepository
     /// Original list of cities, read from JSON and sorted by name
-    private var originalCities: [City] = []
+    private var originalCities: [CityInList] = []
     /// Cities stored by their displayed name
-    private var citiesByName: [String: City] = [:]
+    private var citiesByName: [String: CityInList] = [:]
     /**
      Trie that stores display names of cities
 
@@ -93,11 +93,11 @@ final class CitiesListViewModel {
 }
 
 private extension CitiesListViewModel {
-    private func loadAndSortCities() -> [City] {
+    private func loadAndSortCities() -> [CityInList] {
         return citiesRepository.loadCities().sorted { $0.displayName.lowercased() < $1.displayName.lowercased() }
     }
 
-    private func updateCitiesAfterIntialLoad(_ cities: [City]) {
+    private func updateCitiesAfterIntialLoad(_ cities: [CityInList]) {
         for city in cities {
             trie.insert(word: city.displayName.lowercased())
             citiesByName[city.displayName.lowercased()] = city
@@ -113,9 +113,9 @@ private extension CitiesListViewModel {
         isLoading = false
     }
 
-    private func filterCities(term: String) -> [City] {
+    private func filterCities(term: String) -> [CityInList] {
         let words = trie.findWordsWithPrefix(prefix: term)
-        var cities: [City] = []
+        var cities: [CityInList] = []
         for word in words {
             if let city = citiesByName[word] {
                 cities.append(city)

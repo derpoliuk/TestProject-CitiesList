@@ -18,7 +18,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
+            ].map(CityInList.init)
         let citiesRepository = MockCitiesRepository(cities: cities)
         let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         // WHEN
@@ -40,7 +40,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
+            ].map(CityInList.init)
         let citiesRepository = MockCitiesRepository(cities: cities)
         let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
@@ -62,7 +62,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
+            ].map(CityInList.init)
         let citiesRepository = MockCitiesRepository(cities: cities)
         let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
@@ -82,7 +82,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
+            ].map(CityInList.init)
         let citiesRepository = MockCitiesRepository(cities: cities)
         let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
@@ -101,7 +101,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
+            ].map(CityInList.init)
         let citiesRepository = MockCitiesRepository(cities: cities)
         let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
@@ -119,7 +119,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
+            ].map(CityInList.init)
         let citiesRepository = MockCitiesRepository(cities: cities)
         let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
@@ -143,7 +143,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
+            ].map(CityInList.init)
         let citiesRepository = MockCitiesRepository(cities: cities)
         let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
@@ -155,7 +155,7 @@ final class CitiesListViewModelTests: XCTestCase {
     }
 }
 
-private extension City {
+private extension CityInList {
     convenience init(testName: String) {
         self.init(displayName: testName, coordinates: Coordinates(lat: 0, lon: 0))
     }

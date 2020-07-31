@@ -11,7 +11,7 @@ import MapKit
 
 final class CityDetailViewController: UIViewController {
     @IBOutlet private var mapView: MKMapView!
-    var city: City? {
+    var city: CityInList? {
         didSet {
             if let previousCity = oldValue {
                 mapView.removeAnnotation(previousCity)
@@ -35,7 +35,7 @@ final class CityDetailViewController: UIViewController {
 }
 
 // I declared this extension here because no other files in the app are using it
-extension City: MKAnnotation {
+extension CityInList: MKAnnotation {
     var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: coordinates.lat, longitude: coordinates.lon)
     }

@@ -10,9 +10,9 @@ import Foundation
 @testable import Cities_List
 
 struct MockCitiesRepository: CitiesRepository {
-    let cities: [City]
+    let cities: [CityInList]
 
-    func loadCities() -> [City] {
+    func loadCities() -> [CityInList] {
         return cities
     }
 }

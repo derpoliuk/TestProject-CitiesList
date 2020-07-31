@@ -81,13 +81,13 @@ extension CitiesListViewController: CitiesListViewModelDelegate {
         loading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
     }
 
-    func didUpdate(cities: [City]) {
+    func didUpdate(cities: [CityInList]) {
         searchBar.isUserInteractionEnabled = true
         tableView.reloadData()
     }
 }
 
-private extension City {
+private extension CityInList {
     var displayCoordinates: String {
         return "\(coordinates.lat); \(coordinates.lon)"
     }

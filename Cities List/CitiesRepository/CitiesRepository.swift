@@ -9,19 +9,19 @@
 import Foundation
 
 protocol CitiesRepository {
-    func loadCities() -> [City]
+    func loadCities() -> [CityInList]
 }
 
 struct CitiesJSONRepository: CitiesRepository {
-    func loadCities() -> [City] {
+    func loadCities() -> [CityInList] {
         guard let url = Bundle.main.url(forResource: "cities", withExtension: "json") else {
             fatalError("No cities.json")
         }
         do {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
-            let rawCities = try decoder.decode([RawCity].self, from: data)
-            return rawCities.map(City.init)
+            let rawCities = try decoder.decode([City].self, from: data)
+            return rawCities.map(CityInList.init)
         } catch {
             fatalError("Failed to read JSON data: \(error)")
         }
