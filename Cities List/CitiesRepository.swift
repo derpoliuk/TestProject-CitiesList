@@ -1,5 +1,5 @@
 //
-//  CitiesJSONLoader.swift
+//  CitiesRepository.swift
 //  Cities List
 //
 //  Created by Stanislav Derpoliuk on 11.07.2020.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol CitiesLoader {
+protocol CitiesRepository {
     func loadCities() -> [City]
 }
 
-struct CitiesJSONLoader: CitiesLoader {
+struct CitiesJSONRepository: CitiesRepository {
     func loadCities() -> [City] {
         guard let url = Bundle.main.url(forResource: "cities", withExtension: "json") else {
             fatalError("No cities.json")

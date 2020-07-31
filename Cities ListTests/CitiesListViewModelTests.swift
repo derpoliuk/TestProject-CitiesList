@@ -19,8 +19,8 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+        let citiesRepository = MockCitiesRepository(cities: cities)
+        let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         // WHEN
         viewModel.loadCities(async: false)
         // THEN
@@ -41,8 +41,8 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+        let citiesRepository = MockCitiesRepository(cities: cities)
+        let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
         viewModel.filter(term: "a", async: false)
@@ -63,8 +63,8 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+        let citiesRepository = MockCitiesRepository(cities: cities)
+        let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
         viewModel.filter(term: "Al", async: false)
@@ -83,8 +83,8 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+        let citiesRepository = MockCitiesRepository(cities: cities)
+        let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
         viewModel.filter(term: "Alb", async: false)
@@ -102,8 +102,8 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+        let citiesRepository = MockCitiesRepository(cities: cities)
+        let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
         viewModel.filter(term: "Sydm", async: false)
@@ -120,8 +120,8 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+        let citiesRepository = MockCitiesRepository(cities: cities)
+        let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
         viewModel.filter(term: "Sydm", async: false)
@@ -144,8 +144,8 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+        let citiesRepository = MockCitiesRepository(cities: cities)
+        let viewModel = CitiesListViewModel(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
         viewModel.filter(term: "Sydney, AU", async: false)

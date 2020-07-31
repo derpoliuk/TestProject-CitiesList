@@ -29,7 +29,7 @@ final class CitiesListViewModel {
         }
     }
 
-    private let citiesLoader: CitiesLoader
+    private let citiesRepository: CitiesRepository
     /// Original list of cities, read from JSON and sorted by name
     private var originalCities: [City] = []
     /// Cities stored by their displayed name
@@ -42,8 +42,8 @@ final class CitiesListViewModel {
     private let trie = Trie()
     private var searchDispatchWorkItem: DispatchWorkItem?
 
-    init(citiesLoader: CitiesLoader = CitiesJSONLoader()) {
-        self.citiesLoader = citiesLoader
+    init(citiesRepository: CitiesRepository = CitiesJSONRepository()) {
+        self.citiesRepository = citiesRepository
     }
 
     func loadCities(async: Bool = true) {
@@ -94,7 +94,7 @@ final class CitiesListViewModel {
 
 private extension CitiesListViewModel {
     private func loadAndSortCities() -> [City] {
-        return citiesLoader.loadCities().sorted { $0.displayName.lowercased() < $1.displayName.lowercased() }
+        return citiesRepository.loadCities().sorted { $0.displayName.lowercased() < $1.displayName.lowercased() }
     }
 
     private func updateCitiesAfterIntialLoad(_ cities: [City]) {
