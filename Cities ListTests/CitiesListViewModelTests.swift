@@ -19,7 +19,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(CityInList.init)
-        let citiesRepository = MockCitiesRepository(cities: cities)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
         let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         // WHEN
         viewModel.loadCities(async: false)
@@ -41,7 +41,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(CityInList.init)
-        let citiesRepository = MockCitiesRepository(cities: cities)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
         let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
@@ -63,7 +63,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(CityInList.init)
-        let citiesRepository = MockCitiesRepository(cities: cities)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
         let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
@@ -83,7 +83,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(CityInList.init)
-        let citiesRepository = MockCitiesRepository(cities: cities)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
         let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
@@ -102,7 +102,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(CityInList.init)
-        let citiesRepository = MockCitiesRepository(cities: cities)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
         let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
@@ -120,7 +120,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(CityInList.init)
-        let citiesRepository = MockCitiesRepository(cities: cities)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
         let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
@@ -144,7 +144,7 @@ final class CitiesListViewModelTests: XCTestCase {
             "Anaheim, US",
             "Sydney, AU"
             ].map(CityInList.init)
-        let citiesRepository = MockCitiesRepository(cities: cities)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
         let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN

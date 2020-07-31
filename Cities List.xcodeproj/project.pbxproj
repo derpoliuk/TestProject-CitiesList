@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E34158524BB291300A40CCC /* CityInList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34158424BB291300A40CCC /* CityInList.swift */; };
 		1E34158824BB301100A40CCC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E34158724BB301100A40CCC /* MapKit.framework */; };
-		1E34158A24BB328B00A40CCC /* MockCitiesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34158924BB328B00A40CCC /* MockCitiesRepository.swift */; };
+		1E34158A24BB328B00A40CCC /* CitiesRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34158924BB328B00A40CCC /* CitiesRepositoryMock.swift */; };
 		1E34158C24BB3A7C00A40CCC /* Trie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34158B24BB3A7C00A40CCC /* Trie.swift */; };
 		1E34159024BB515200A40CCC /* TrieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E34158F24BB515200A40CCC /* TrieTests.swift */; };
 		1E6B7C2024D42F2D000CA649 /* CityDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B7C1F24D42F2D000CA649 /* CityDetails.swift */; };
@@ -51,7 +51,7 @@
 /* Begin PBXFileReference section */
 		1E34158424BB291300A40CCC /* CityInList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityInList.swift; sourceTree = "<group>"; };
 		1E34158724BB301100A40CCC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		1E34158924BB328B00A40CCC /* MockCitiesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCitiesRepository.swift; sourceTree = "<group>"; };
+		1E34158924BB328B00A40CCC /* CitiesRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesRepositoryMock.swift; sourceTree = "<group>"; };
 		1E34158B24BB3A7C00A40CCC /* Trie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trie.swift; sourceTree = "<group>"; };
 		1E34158F24BB515200A40CCC /* TrieTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrieTests.swift; sourceTree = "<group>"; };
 		1E6B7C1F24D42F2D000CA649 /* CityDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetails.swift; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 		1E6B7C2924D4354E000CA649 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				1E34158924BB328B00A40CCC /* MockCitiesRepository.swift */,
+				1E34158924BB328B00A40CCC /* CitiesRepositoryMock.swift */,
 				1E6B7C3A24D471E5000CA649 /* LoadingErrorCitiesRepositoryMock.swift */,
 			);
 			path = Mocks;
@@ -378,7 +378,7 @@
 				1E34159024BB515200A40CCC /* TrieTests.swift in Sources */,
 				1E96273D24B9BFF40064E991 /* CitiesListViewModelTests.swift in Sources */,
 				1E6B7C3B24D471E5000CA649 /* LoadingErrorCitiesRepositoryMock.swift in Sources */,
-				1E34158A24BB328B00A40CCC /* MockCitiesRepository.swift in Sources */,
+				1E34158A24BB328B00A40CCC /* CitiesRepositoryMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
