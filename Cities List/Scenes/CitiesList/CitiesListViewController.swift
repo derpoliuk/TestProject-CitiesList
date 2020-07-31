@@ -15,7 +15,7 @@ final class CitiesListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.delegate = self
+        viewModel.subscribe(with: self)
         viewModel.loadCities()
     }
 
@@ -67,21 +67,26 @@ extension CitiesListViewController: UISearchBarDelegate {
     }
 }
 
-// MARK: - CitiesListViewModelDelegate
+// MARK: - Observer
 
-extension CitiesListViewController: CitiesListViewModelDelegate {
-    func didUpdate(loading: Bool) {
-        loading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+extension CitiesListViewController: Observer {
+    func didUpdate<T>(_ viewModel: T) where T : Observable {
+        if viewModel is CitiesListViewModel {
+            updateFromViewModel()
+        }
     }
 
-    func didUpdate(cities: [CityInList]) {
-        searchBar.isUserInteractionEnabled = true
-        tableView.reloadData()
+    func didError(_ error: Error) {
+        print("Error observing view model: \(error)")
     }
 }
 
-private extension CityInList {
-    var displayCoordinates: String {
-        return "\(coordinates.lat); \(coordinates.lon)"
+// MARK: - Private Methods
+
+private extension CitiesListViewController {
+    private func updateFromViewModel() {
+        viewModel.isLoading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+        searchBar.isUserInteractionEnabled = !viewModel.cities.isEmpty
+        tableView.reloadData()
     }
 }

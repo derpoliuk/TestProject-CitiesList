@@ -22,3 +22,9 @@ final class CityInList: NSObject {
         coordinates = city.coord
     }
 }
+
+extension CityInList {
+    var displayCoordinates: String {
+        return "\(coordinates.lat); \(coordinates.lon)"
+    }
+}

@@ -8,24 +8,15 @@
 
 import Foundation
 
-/**
- Delegate isn't a good fit for MVVM, Observer will be much better. But in the scope of this test project delegate gets the job done.
- */
-protocol CitiesListViewModelDelegate: class {
-    func didUpdate(loading: Bool)
-    func didUpdate(cities: [CityInList])
-}
-
-final class CitiesListViewModel {
-    weak var delegate: CitiesListViewModelDelegate?
+final class CitiesListViewModel: ObservableType {
     var cities: [CityInList] = []{
         didSet {
-            delegate?.didUpdate(cities: cities)
+            postUpdateToObservers()
         }
     }
     var isLoading = false {
         didSet {
-            delegate?.didUpdate(loading: isLoading)
+            postUpdateToObservers()
         }
     }
 
