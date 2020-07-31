@@ -27,6 +27,11 @@ final class CitiesListViewController: UITableViewController {
     func bind(to viewModel: CitiesListViewModel) {
         self.viewModel = viewModel
         viewModel.subscribe(with: self)
+        viewModel.errorHandler = { [weak self] error in
+            DispatchQueue.main.async {
+                self?.showLoadingError()
+            }
+        }
         if isViewLoaded {
             viewModel.loadCities()
         }
@@ -89,5 +94,11 @@ private extension CitiesListViewController {
         viewModel.isLoading == true ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
         searchBar.isUserInteractionEnabled = viewModel.cities.isEmpty == false
         tableView.reloadData()
+    }
+
+    private func showLoadingError() {
+        let alert = UIAlertController(title: "Failed to load cities from JSON", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 }

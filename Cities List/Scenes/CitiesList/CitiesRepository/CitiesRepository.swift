@@ -9,21 +9,22 @@
 import Foundation
 
 protocol CitiesRepository {
-    func loadCities() -> [CityInList]
+    func loadCities() throws -> [CityInList]
+}
+
+enum CitiesRepositoryError: Error {
+    case fileError
 }
 
 struct CitiesJSONRepository: CitiesRepository {
-    func loadCities() -> [CityInList] {
+    func loadCities() throws -> [CityInList] {
         guard let url = Bundle.main.url(forResource: "cities", withExtension: "json") else {
-            fatalError("No cities.json")
+            assertionFailure("No cities.json")
+            throw CitiesRepositoryError.fileError
         }
-        do {
-            let data = try Data(contentsOf: url)
-            let decoder = JSONDecoder()
-            let rawCities = try decoder.decode([City].self, from: data)
-            return rawCities.map(CityInList.init)
-        } catch {
-            fatalError("Failed to read JSON data: \(error)")
-        }
+        let data = try Data(contentsOf: url)
+        let decoder = JSONDecoder()
+        let rawCities = try decoder.decode([City].self, from: data)
+        return rawCities.map(CityInList.init)
     }
 }

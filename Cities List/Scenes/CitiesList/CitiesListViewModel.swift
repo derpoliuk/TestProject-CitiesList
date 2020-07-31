@@ -11,12 +11,15 @@ import Foundation
 protocol CitiesListViewModel: Observable {
     var cities: [CityInList] { get }
     var isLoading: Bool { get }
+    var errorHandler: ((Error) -> Void)? { get set }
+    var eventHandler: ((CitiesListSceneResult) -> Void)? { get }
     func loadCities()
     func filter(term: String)
     func displayCity(for indexPath: IndexPath)
 }
 
 final class CitiesListViewModelImpl: ObservableType, CitiesListViewModel {
+    var errorHandler: ((Error) -> Void)?
     var eventHandler: ((CitiesListSceneResult) -> Void)?
     private(set) var cities: [CityInList] = []{
         didSet {
@@ -64,15 +67,27 @@ extension CitiesListViewModelImpl {
     func loadCities(async: Bool) {
         isLoading = true
         guard async else {
-            let cities = loadAndSortCities()
-            updateCitiesAfterIntialLoad(cities)
+            do {
+                let cities = try loadAndSortCities()
+                updateCitiesAfterIntialLoad(cities)
+            } catch {
+                self.isLoading = false
+                errorHandler?(error)
+            }
             return
         }
         DispatchQueue.global().async { [weak self] in
             guard let `self` = self else {
                 return
             }
-            let cities = self.loadAndSortCities()
+            let cities: [CityInList]
+            do {
+                cities = try self.loadAndSortCities()
+            } catch {
+                self.errorHandler?(error)
+                self.isLoading = false
+                return
+            }
             DispatchQueue.main.async { [weak self] in
                 self?.updateCitiesAfterIntialLoad(cities)
             }
@@ -108,8 +123,8 @@ extension CitiesListViewModelImpl {
 }
 
 private extension CitiesListViewModelImpl {
-    private func loadAndSortCities() -> [CityInList] {
-        return citiesRepository.loadCities().sorted { $0.displayName.lowercased() < $1.displayName.lowercased() }
+    private func loadAndSortCities() throws -> [CityInList] {
+        return try citiesRepository.loadCities().sorted { $0.displayName.lowercased() < $1.displayName.lowercased() }
     }
 
     private func updateCitiesAfterIntialLoad(_ cities: [CityInList]) {
