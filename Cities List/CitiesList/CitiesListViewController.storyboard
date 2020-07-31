@@ -56,12 +56,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Master" id="Iwl-Dn-6zN">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="BIp-js-0Fl">
+                        <barButtonItem key="rightBarButtonItem" id="BIp-js-0Fl">
                             <view key="customView" contentMode="scaleToFill" id="BcG-DJ-tIb">
                                 <rect key="frame" x="302" y="5.5" width="92" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eg1-Wv-iTx">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="eg1-Wv-iTx">
                                         <rect key="frame" x="72" y="6.5" width="20" height="20"/>
                                         <color key="color" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </activityIndicatorView>
