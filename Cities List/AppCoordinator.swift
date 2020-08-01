@@ -8,9 +8,12 @@
 
 import UIKit
 
+/*
+ My original intent was to use coordinators completely without storyboards functionality (using them as regular XIB files for each View Controller). But going with this pure approach required more `UISplitViewController` setup and code became very buggy. I decided to keep Main.storyboard with segues to make `UISplitViewController` setup siple.
+ */
 final class AppCoordinator {
     private weak var splitViewController: UISplitViewController?
-    var citiesListCoordinator: CitiesListCoordinator?
+    private var citiesListCoordinator: CitiesListCoordinator?
 
     init(splitViewController: UISplitViewController) {
         self.splitViewController = splitViewController
