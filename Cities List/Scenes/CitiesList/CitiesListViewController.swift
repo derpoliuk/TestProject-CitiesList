@@ -14,9 +14,7 @@ final class CitiesListViewController: UITableViewController {
     private var viewModel: CitiesListViewModel?
 
     override func viewDidLoad() {
-        if viewModel?.isLoading == false {
-            viewModel?.loadCities()
-        }
+        viewModel?.loadCities()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -84,6 +82,7 @@ extension CitiesListViewController: Observer {
 
     func didError(_ error: Error) {
         print("Error observing view model: \(error)")
+        showAlert(title: "ViewModel update failed")
     }
 }
 
@@ -91,14 +90,16 @@ extension CitiesListViewController: Observer {
 
 private extension CitiesListViewController {
     private func updateFromViewModel(viewModel: CitiesListViewModel) {
-        viewModel.isLoading == true ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+        if viewModel.isLoading {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
         searchBar.isUserInteractionEnabled = viewModel.cities.isEmpty == false
         tableView.reloadData()
     }
 
     private func showLoadingError() {
-        let alert = UIAlertController(title: "Failed to load cities from JSON", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        showAlert(title: "Failed to load cities from JSON")
     }
 }

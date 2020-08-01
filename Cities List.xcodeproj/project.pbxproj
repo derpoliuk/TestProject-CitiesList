@@ -37,6 +37,7 @@
 		1E96274E24B9C9DD0064E991 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96274D24B9C9DD0064E991 /* Coordinates.swift */; };
 		1E96275024B9C9FC0064E991 /* CitiesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96274F24B9C9FC0064E991 /* CitiesRepository.swift */; };
 		1EB935F124D5B94D00F73EB2 /* LoadingCitiesRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB935F024D5B94D00F73EB2 /* LoadingCitiesRepositoryMock.swift */; };
+		1EB935F324D5BD7F00F73EB2 /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB935F224D5BD7F00F73EB2 /* UIViewController+Alerts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		1E96274D24B9C9DD0064E991 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		1E96274F24B9C9FC0064E991 /* CitiesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesRepository.swift; sourceTree = "<group>"; };
 		1EB935F024D5B94D00F73EB2 /* LoadingCitiesRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCitiesRepositoryMock.swift; sourceTree = "<group>"; };
+		1EB935F224D5BD7F00F73EB2 /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				1E6B7C2B24D43A0D000CA649 /* Observable */,
 				1E6B7C1E24D42E1E000CA649 /* Trie */,
 				1E6B7C2724D43528000CA649 /* UIViewController+StoryboardInit.swift */,
+				1EB935F224D5BD7F00F73EB2 /* UIViewController+Alerts.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				1E96274C24B9C9D30064E991 /* City.swift in Sources */,
 				1E6B7C3524D44A18000CA649 /* AppCoordinator.swift in Sources */,
 				1E6B7C3324D43A71000CA649 /* Array+Observation.swift in Sources */,
+				1EB935F324D5BD7F00F73EB2 /* UIViewController+Alerts.swift in Sources */,
 				1E6B7C2D24D43A1B000CA649 /* Observable.swift in Sources */,
 				1E6B7C3124D43A44000CA649 /* Observer.swift in Sources */,
 				1E6B7C2024D42F2D000CA649 /* CityDetails.swift in Sources */,
