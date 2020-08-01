@@ -18,7 +18,7 @@ final class CitiesListCoordinator {
     func start() {
         let viewModel = CitiesListViewModelImpl()
         viewModel.eventHandler = { [weak self] result in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             switch result {
             case .displayCityDetails(let city): self.showCityDetails(for: city)
             }
@@ -35,10 +35,11 @@ final class CitiesListCoordinator {
 private extension CitiesListCoordinator {
     private func showCityDetails(for city: CityInList) {
         guard let splitViewController = splitViewController else {
+            assertionFailure("No splitViewController")
             return
         }
         let cityDetailViewController: CityDetailViewController
-        if splitViewController.viewControllers.count > 1, let navigationController = splitViewController.viewControllers[1] as? UINavigationController, let viewController = navigationController.viewControllers[0] as? CityDetailViewController {
+        if let viewController = currentCityDetailsViewController {
             cityDetailViewController = viewController
         } else {
             cityDetailViewController = CityDetailViewController.initAsInitialFromStoryboard(with: CityDetailViewController.self)
