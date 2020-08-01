@@ -167,6 +167,32 @@ final class CitiesListViewModelTests: XCTestCase {
         // THEN
         XCTAssertNotNil(error)
     }
+
+    func testMultiplLoadingCallsSimultaneously() {
+        // GIVEN
+        let citiesRepository = LoadingCitiesRepositoryMock()
+        let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
+        XCTAssertEqual(citiesRepository.numberOfLoadCitiesCalls, 0)
+        // WHEN
+        viewModel.loadCities(async: false)
+        XCTAssertEqual(citiesRepository.numberOfLoadCitiesCalls, 1)
+        viewModel.loadCities(async: false)
+        // THEN
+        XCTAssertEqual(citiesRepository.numberOfLoadCitiesCalls, 2)
+    }
+
+    func testSecondLoadingCallWhenCitiesAreLoaded() {
+        // GIVEN
+        let citiesRepository = LoadingCitiesRepositoryMock(shouldDelayExecution: true)
+        let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
+        // WHEN
+        XCTAssertEqual(viewModel.isLoading, false)
+        viewModel.loadCities(async: false)
+        XCTAssertEqual(citiesRepository.numberOfLoadCitiesCalls, 1)
+        // THEN
+        viewModel.loadCities(async: true)
+        XCTAssertEqual(citiesRepository.numberOfLoadCitiesCalls, 1)
+    }
 }
 
 private extension CityInList {

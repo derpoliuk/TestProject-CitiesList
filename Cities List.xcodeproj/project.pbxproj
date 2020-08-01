@@ -36,6 +36,7 @@
 		1E96274C24B9C9D30064E991 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96274B24B9C9D30064E991 /* City.swift */; };
 		1E96274E24B9C9DD0064E991 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96274D24B9C9DD0064E991 /* Coordinates.swift */; };
 		1E96275024B9C9FC0064E991 /* CitiesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96274F24B9C9FC0064E991 /* CitiesRepository.swift */; };
+		1EB935F124D5B94D00F73EB2 /* LoadingCitiesRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB935F024D5B94D00F73EB2 /* LoadingCitiesRepositoryMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		1E96274B24B9C9D30064E991 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		1E96274D24B9C9DD0064E991 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
 		1E96274F24B9C9FC0064E991 /* CitiesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesRepository.swift; sourceTree = "<group>"; };
+		1EB935F024D5B94D00F73EB2 /* LoadingCitiesRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCitiesRepositoryMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 			children = (
 				1E34158924BB328B00A40CCC /* CitiesRepositoryMock.swift */,
 				1E6B7C3A24D471E5000CA649 /* LoadingErrorCitiesRepositoryMock.swift */,
+				1EB935F024D5B94D00F73EB2 /* LoadingCitiesRepositoryMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				1E34159024BB515200A40CCC /* TrieTests.swift in Sources */,
 				1E96273D24B9BFF40064E991 /* CitiesListViewModelTests.swift in Sources */,
 				1E6B7C3B24D471E5000CA649 /* LoadingErrorCitiesRepositoryMock.swift in Sources */,
+				1EB935F124D5B94D00F73EB2 /* LoadingCitiesRepositoryMock.swift in Sources */,
 				1E34158A24BB328B00A40CCC /* CitiesRepositoryMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

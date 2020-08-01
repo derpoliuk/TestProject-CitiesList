@@ -50,6 +50,9 @@ final class CitiesListViewModelImpl: ObservableType, CitiesListViewModel {
     }
 
     func loadCities() {
+        guard cities.isEmpty, !isLoading else {
+            return
+        }
         loadCities(async: true)
     }
 
@@ -70,14 +73,15 @@ extension CitiesListViewModelImpl {
             do {
                 let cities = try loadAndSortCities()
                 updateCitiesAfterIntialLoad(cities)
+                isLoading = false
             } catch {
-                self.isLoading = false
+                isLoading = false
                 errorHandler?(error)
             }
             return
         }
         DispatchQueue.global().async { [weak self] in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             let cities: [CityInList]
@@ -90,6 +94,7 @@ extension CitiesListViewModelImpl {
             }
             DispatchQueue.main.async { [weak self] in
                 self?.updateCitiesAfterIntialLoad(cities)
+                self?.isLoading = false
             }
         }
     }
@@ -134,7 +139,6 @@ private extension CitiesListViewModelImpl {
         }
         originalCities = cities
         self.cities = cities
-        isLoading = false
     }
 
     private func resetCities() {
