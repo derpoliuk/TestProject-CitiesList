@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class CityInList: NSObject {
+final class CityInList {
     let displayName: String
     let coordinates: Coordinates
 
