@@ -1,5 +1,5 @@
 //
-//  City.swift
+//  CityInList.swift
 //  Cities List
 //
 //  Created by Stanislav Derpoliuk on 12.07.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class City: NSObject {
+final class CityInList {
     let displayName: String
     let coordinates: Coordinates
 
@@ -17,8 +17,14 @@ final class City: NSObject {
         self.coordinates = coordinates
     }
 
-    init(rawCity: RawCity) {
-        displayName = "\(rawCity.name), \(rawCity.country)"
-        coordinates = rawCity.coord
+    init(city: City) {
+        displayName = "\(city.name), \(city.country)"
+        coordinates = city.coord
+    }
+}
+
+extension CityInList {
+    var displayCoordinates: String {
+        return "\(coordinates.lat); \(coordinates.lon)"
     }
 }

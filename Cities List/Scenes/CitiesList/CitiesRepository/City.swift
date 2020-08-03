@@ -1,5 +1,5 @@
 //
-//  RawCity.swift
+//  City.swift
 //  Cities List
 //
 //  Created by Stanislav Derpoliuk on 11.07.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RawCity: Codable {
+struct City: Codable {
     let name: String
     let country: String
     let coord: Coordinates

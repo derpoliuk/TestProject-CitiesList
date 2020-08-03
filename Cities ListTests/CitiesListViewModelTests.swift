@@ -18,9 +18,9 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+            ].map(CityInList.init)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
+        let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         // WHEN
         viewModel.loadCities(async: false)
         // THEN
@@ -40,9 +40,9 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+            ].map(CityInList.init)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
+        let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
         viewModel.filter(term: "a", async: false)
@@ -62,9 +62,9 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+            ].map(CityInList.init)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
+        let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
         viewModel.filter(term: "Al", async: false)
@@ -82,9 +82,9 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+            ].map(CityInList.init)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
+        let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
         viewModel.filter(term: "Alb", async: false)
@@ -101,9 +101,9 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+            ].map(CityInList.init)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
+        let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
         viewModel.filter(term: "Sydm", async: false)
@@ -119,9 +119,9 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+            ].map(CityInList.init)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
+        let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
         viewModel.filter(term: "Sydm", async: false)
@@ -143,9 +143,9 @@ final class CitiesListViewModelTests: XCTestCase {
             "Arizona, US",
             "Anaheim, US",
             "Sydney, AU"
-            ].map(City.init)
-        let citiesLoader = MockCitiesLoader(cities: cities)
-        let viewModel = CitiesListViewModel(citiesLoader: citiesLoader)
+            ].map(CityInList.init)
+        let citiesRepository = CitiesRepositoryMock(cities: cities)
+        let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
         viewModel.loadCities(async: false)
         // WHEN
         viewModel.filter(term: "Sydney, AU", async: false)
@@ -153,9 +153,49 @@ final class CitiesListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.cities.count, 1)
         XCTAssertEqual(viewModel.cities[0].displayName, "Sydney, AU")
     }
+
+    func testLoadingError() {
+        // GIVEN
+        let citiesRepository = LoadingErrorCitiesRepositoryMock()
+        let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
+        var error: Error?
+        viewModel.errorHandler = { inError in
+            error = inError
+        }
+        // WHEN
+        viewModel.loadCities(async: false)
+        // THEN
+        XCTAssertNotNil(error)
+    }
+
+    func testMultiplLoadingCallsSimultaneously() {
+        // GIVEN
+        let citiesRepository = LoadingCitiesRepositoryMock()
+        let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
+        XCTAssertEqual(citiesRepository.numberOfLoadCitiesCalls, 0)
+        // WHEN
+        viewModel.loadCities(async: false)
+        XCTAssertEqual(citiesRepository.numberOfLoadCitiesCalls, 1)
+        viewModel.loadCities(async: false)
+        // THEN
+        XCTAssertEqual(citiesRepository.numberOfLoadCitiesCalls, 2)
+    }
+
+    func testSecondLoadingCallWhenCitiesAreLoaded() {
+        // GIVEN
+        let citiesRepository = LoadingCitiesRepositoryMock(shouldDelayExecution: true)
+        let viewModel = CitiesListViewModelImpl(citiesRepository: citiesRepository)
+        // WHEN
+        XCTAssertEqual(viewModel.isLoading, false)
+        viewModel.loadCities(async: false)
+        XCTAssertEqual(citiesRepository.numberOfLoadCitiesCalls, 1)
+        // THEN
+        viewModel.loadCities(async: true)
+        XCTAssertEqual(citiesRepository.numberOfLoadCitiesCalls, 1)
+    }
 }
 
-private extension City {
+private extension CityInList {
     convenience init(testName: String) {
         self.init(displayName: testName, coordinates: Coordinates(lat: 0, lon: 0))
     }
